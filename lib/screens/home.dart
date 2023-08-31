@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   saveData()async{
-   // product.setData();
+    product.setData();
     List<Map> response=await db.select("SELECT * FROM products");
     print("$response");
     setState(() {
