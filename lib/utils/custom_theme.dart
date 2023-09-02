@@ -33,7 +33,6 @@ class CustomTheme{
           fontSize: fontSize['lg'],
           fontWeight: FontWeight.bold,
           letterSpacing: 4
-
         )
       ),
 

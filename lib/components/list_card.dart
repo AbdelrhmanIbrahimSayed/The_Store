@@ -1,12 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:the_store/components/custom_button.dart';
+import 'package:the_store/models/database.dart';
+import '../screens/mainWidget.dart';
 import '../utils/custom_theme.dart';
 
 class ListCard extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String price;
-  const ListCard({super.key, required this.imageUrl, required this.title, required this.price});
+  final String username;
+  final int id;
+  const ListCard({super.key, required this.imageUrl, required this.title, required this.price, required this.id, required this.username});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +58,29 @@ class ListCard extends StatelessWidget {
                           "Price : $price\$",
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8,right:8 ),
+                        child: CustomButton(text:'Remove from cart', onPress:() {
+                          sqflDB db =sqflDB();
+                          db.delete("DELETE FROM check_out WHERE id=$id");
+                          (context as Element).markNeedsBuild();
+
+
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) => MainWidgetScreen(username: username,)));
+
+                          Fluttertoast.showToast(
+                              msg: 'Product removed Successfully',
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              textColor: Colors.white,
+                              fontSize: 16.0
+                          );
+                        },)
                       ),
                     ],
                   ),

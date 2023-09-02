@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:the_store/components/custom_button.dart';
 import 'package:the_store/components/list_card.dart';
 import 'package:the_store/models/database.dart';
@@ -21,6 +22,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
     getData();
     super.initState();
   }
+
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -33,13 +36,24 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
             padding: EdgeInsets.symmetric(vertical: 30),
             itemCount: carts.length,
             itemBuilder: (context, index) {
-              return ListCard(imageUrl: carts[index]["imageUrl"],price: carts[index]["price"],title:carts[index]["title"] ,);
+              return ListCard(imageUrl: carts[index]["imageUrl"],price: carts[index]["price"],title:carts[index]["title"] ,id: carts[index]["id"], username: widget.username,);
             },
         ),
         priceFooter(),
         Container(padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 30),
           child: CustomButton(text: "CheckOut",
-            onPress: () {},
+            onPress: () {
+              // Navigator.of(context).push(new MaterialPageRoute(builder:
+              //     (BuildContext context) => new CreditCard()));
+              Fluttertoast.showToast(
+                  msg: 'coming soon',
+                  toastLength: Toast.LENGTH_LONG,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  textColor: Colors.white,
+                  fontSize: 16.0
+              );
+            } ,
             loading: false,
           ),
         )
@@ -47,6 +61,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
     )
     );
   }
+
   priceFooter(){
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 30),

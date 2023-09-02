@@ -4,14 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:provider/provider.dart';
 import 'package:the_store/firebase_options.dart';
-import 'package:the_store/screens/checkout.dart';
-import 'package:the_store/screens/home.dart';
 import 'package:the_store/screens/login.dart';
-import 'package:the_store/screens/product.dart';
-import 'package:the_store/screens/profile.dart';
-
 import 'package:the_store/utils/custom_theme.dart';
 
 
@@ -22,7 +16,7 @@ void main() async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // stripe setup
+
   final String response =await rootBundle.loadString("assets/config/stripe.json");
   final data =await json.decode(response);
   Stripe.publishableKey=data["publishableKey"];
@@ -65,7 +59,7 @@ class MyApp extends StatelessWidget {
           body: const TabBarView(
             children: [
               //HomeScreen(),
-          ///    ProfileScreen(),
+          //    ProfileScreen(),
             //  CheckOutScreen(),
             ],
           ),

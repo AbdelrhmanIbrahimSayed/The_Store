@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:the_store/components/custom_button.dart';
 import 'package:the_store/models/database.dart';
+import 'package:the_store/screens/mainWidget.dart';
 import 'package:the_store/utils/custom_theme.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -133,6 +134,10 @@ class _ProductScreenState extends State<ProductScreen> {
     sqflDB db =sqflDB();
     int response =  await db.insert(
         "INSERT INTO check_out (imageUrl,title,price,username) VALUES ('$imageUrl','$title','$price','$username') ");
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => MainWidgetScreen(username: username,)));
     Fluttertoast.showToast(
         msg: 'Product Added To Cart',
         toastLength: Toast.LENGTH_LONG,
